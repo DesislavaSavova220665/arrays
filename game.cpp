@@ -1,37 +1,23 @@
 #include "game.h"
 #include "surface.h"
 #include "template.h"
-#include <cstdio> //printf
-#include <thread>
 
-enum
-{
-    PARTICLES = 20000
-};
 namespace Tmpl8
 {
-    const int NUM_PARTICLES = 20000000;
-    int x[NUM_PARTICLES], y[NUM_PARTICLES];
+    float x = 400, y = 256;
 
-    void Game::Init()
-    {
-        for (int i = 0; i < NUM_PARTICLES; i++)
-        {
-            x[i] = IRand(800);
-            y[i] = IRand(512);
-        }
-    }
+    void Game::Init() {}
 
     void Game::Shutdown() {}
 
     void Game::Tick(float deltaTime)
     {
         screen->Clear(0);
-        for (int i = 0; i < NUM_PARTICLES; i++)
-        {
-            x[i] = (x[i] + 800 + (((i & 1) * 2) - 1)) % 800;
-            y[i] = (y[i] + 512 + ((((i >> 2) & 1) * 2) - 1)) & 511;
-            screen->GetBuffer()[x[i] + y[i] * 800] = 0xffffff;
-        }
+        screen->Line(mousex, 0, mousex, 511, 0xff0000);
+        screen->Line(0, mousey, 799, mousey, 0xff0000); float dx = x - mousex, dy = y - mousey;
+        float dist = sqrtf(dx * dx + dy * dy);
+        if (dist < 50)
+            x += dx / dist, y += dy / dist;
+        screen->Plot((int)x, (int)y, 0xffffff);
     }
 };
