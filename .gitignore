@@ -511,7 +511,6 @@ local.properties
 *.lai
 *.so
 *.so.*
-*.dll
 *.dylib
 
 # Qt-es
@@ -963,7 +962,6 @@ _deps
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
 
 # Fortran module files
 *.mod
