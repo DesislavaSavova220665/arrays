@@ -580,8 +580,6 @@ mono_crash.*
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
-x64/
-x86/
 [Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
@@ -975,7 +973,6 @@ _deps
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
 *.exe
@@ -1005,13 +1002,11 @@ _deps
 *.pch
 
 # Libraries
-*.lib
 *.a
 *.la
 *.lo
 
 # Shared objects (inc. Windows DLLs)
-*.dll
 *.so
 *.so.*
 *.dylib
