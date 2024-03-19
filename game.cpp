@@ -39,11 +39,6 @@ namespace Tmpl8
 
     void DrawTile(int tx, int ty, Surface* screen, int x, int y)
     {
-        auto test1 = screen->GetWidth();
-        auto test2 = screen->GetHeight();
-        auto test3 = tiles.GetWidth();
-        auto test4 = tiles.GetHeight();
-
         Pixel* src = tiles.GetBuffer() + 1 + tx * 33 + (1 + ty * 33) * tiles.GetWidth();
         Pixel* dst = screen->GetBuffer() + x + y * screen->GetWidth();
         for (int i = 0; i < 32; i++, src += tiles.GetWidth(), dst += screen->GetWidth())
