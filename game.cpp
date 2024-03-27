@@ -2,6 +2,8 @@
 #include "surface.h"
 #include "windows.h"
 #include "template.h"
+#include <cstdio>
+
 #define WIN32_LEAN_AND_MEAN
 
 constexpr int tileWidth = 32;

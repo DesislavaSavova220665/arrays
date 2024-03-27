@@ -17,6 +17,7 @@
     <ClInclude Include="template.h">
       <Filter>template code</Filter>
     </ClInclude>
+    <ClInclude Include="Header.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">
