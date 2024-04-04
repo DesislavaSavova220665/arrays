@@ -8,6 +8,7 @@
     <ClCompile Include="template.cpp">
       <Filter>template code</Filter>
     </ClCompile>
+    <ClCompile Include="tank.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />

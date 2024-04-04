@@ -1,25 +1,43 @@
 #pragma once
+#include "template.h"
+#include "surface.h"
 
 class Tank
 {
 public:
-	void move(int x, int y);
+	Tank(const Tmpl8::vec2& pos, const Tmpl8::vec2& dir = Tmpl8::vec2(0)) :
+		pos(pos),
+		dir(dir),
+		tank(new Tmpl8::Surface("assets/ctankbase.tga"), 16)
+	{}
 
-protected:
-	virtual void doMove();
+	void move(float x, float y)
+	{
+		pos.x += x;
+		pos.y += y;
+
+		dir.x = x;
+		dir.y = y;
+	}
+
+	void setPos(const Tmpl8::vec2& newPos)
+	{
+		pos = newPos;
+	}
+
+	const Tmpl8::vec2& getPos() const
+	{
+		return pos;
+	}
+
+	void draw(Tmpl8::Surface* surface,  const Tmpl8::vec2& camera )
+	{
+		tank.Draw(surface, static_cast<int>(pos.x - camera.x), static_cast<int>(pos.y - camera.y));
+	}
 
 private: 
 	//tank position
-	int x;
-	int y;
+	Tmpl8::vec2 pos;
+	Tmpl8::vec2 dir;
+	Tmpl8::Sprite tank;
 };
-
-class enemyTank : public Tank
-{
-protected:
-	void doMove() override;
-};
-
-//in code:
-
-Tank* pTank = EnemyTank();

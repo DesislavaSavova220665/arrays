@@ -224,6 +224,7 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="surface.cpp" />
+    <ClCompile Include="tank.cpp" />
     <ClCompile Include="template.cpp" />
   </ItemGroup>
   <ItemGroup>

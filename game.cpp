@@ -4,6 +4,8 @@
 #include "template.h"
 #include <cstdio>
 
+#include "tank.h"
+
 #define WIN32_LEAN_AND_MEAN
 
 constexpr int tileWidth = 32;
@@ -13,6 +15,7 @@ constexpr int mapHeight = 5 * tileHeight;
 constexpr int tileOffsetX = (ScreenWidth / 2 - mapWidth / 2 );
 constexpr int tileOffsetY = (ScreenHeight / 2 - mapHeight / 2);
 
+Tmpl8::vec2 camera{ -tileOffsetX,-tileOffsetY };
 
 namespace Tmpl8
 {
@@ -20,9 +23,10 @@ namespace Tmpl8
     void Game::Shutdown() {}
 
     Surface tiles("assets/tilemap.png");
+
+    Tank playerTank(Tmpl8::vec2(32, 32));
     Sprite tank(new Surface("assets/ctankbase.tga"), 16);
-    float px = 32.0f + tileOffsetX, py = 32.0f + tileOffsetY;
-    float playerSpeed = 60.0f;
+   float playerSpeed = 60.0f;
 
     char map[5][31] = {
          "kc kc kc kc kc kc kc kc kc kc ",
@@ -51,7 +55,7 @@ namespace Tmpl8
     void Game::Tick(float deltaTime)
     {
         deltaTime /= 1000.0f;
-        float nx = px, ny = py;
+       // float nx = px, ny = py;
 
         screen->Clear(0);
         for (int y = 0; y < 5; y++)
@@ -64,46 +68,48 @@ namespace Tmpl8
             }
         }
 
-        float velocityX = 0.0f;
-        float velocityY = 0.0f;
+        //float velocityX = 0.0f;
+        //float velocityY = 0.0f;
+
+        Tmpl8::vec2 newPos = playerTank.getPos();
 
         if (GetAsyncKeyState(VK_LEFT))
         {
-            velocityX = -playerSpeed * deltaTime;
-            tank.SetFrame(12);
+            newPos.x -= playerSpeed * deltaTime;
+           tank.SetFrame(12);
         }
 
         if (GetAsyncKeyState(VK_RIGHT))
         {
-            velocityX = playerSpeed * deltaTime;
+            newPos.x += playerSpeed * deltaTime;
             tank.SetFrame(4);
         }
 
         if (GetAsyncKeyState(VK_UP))
         {
-            velocityY = -playerSpeed * deltaTime;
+            newPos.y -= playerSpeed * deltaTime;
             tank.SetFrame(0);
         }
 
         if (GetAsyncKeyState(VK_DOWN))
         {
-            velocityY = playerSpeed * deltaTime;
+            newPos.y += playerSpeed * deltaTime;
             tank.SetFrame(8);
         }
 
-        nx += velocityX;
-        ny += velocityY;
+       // nx += velocityX;
+       // ny += velocityY;
 
 
-        if (CheckPos(nx + tank.GetWidth() / 2, ny + tank.GetHeight() / 2) &&
-            CheckPos(nx + tank.GetWidth(), ny + tank.GetHeight()))
+        if (CheckPos(newPos.x + 8, newPos.y + 11) && CheckPos(newPos.x + 43, newPos.y + 43) &&
+            CheckPos(newPos.x + 43, newPos.y + 11) && CheckPos(newPos.x + 8, newPos.y + 43))
         {
-            px = nx;
-            py = ny;
+            playerTank.setPos(newPos);
+            //playerTank.move(newPos.x, newPos.y);
         }
 
-        tank.Draw(screen, px, py);
-        screen->Box(px, py, px + tank.GetWidth(), py + tank.GetHeight(), 0xffff00);
+        playerTank.draw(screen, camera);
+       // screen->Box(px, py, px + tank.GetWidth(), py + tank.GetHeight(), 0xffff00);
     }
 
-};
+}
