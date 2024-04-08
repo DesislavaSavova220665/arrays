@@ -54,6 +54,8 @@ namespace Tmpl8
 
     void Game::Tick(float deltaTime)
     {
+        Tank myTank(Tmpl8::vec2(0));
+
         deltaTime /= 1000.0f;
        // float nx = px, ny = py;
 
@@ -107,6 +109,10 @@ namespace Tmpl8
             playerTank.setPos(newPos);
             //playerTank.move(newPos.x, newPos.y);
         }
+
+
+       // Tank::tank.Draw(screem, x, y);
+
 
         playerTank.draw(screen, camera);
        // screen->Box(px, py, px + tank.GetWidth(), py + tank.GetHeight(), 0xffff00);

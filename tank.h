@@ -25,13 +25,6 @@ private:
 	//all tanks get this sprite
 	static Tmpl8::Sprite tank;
 };
-
-
-
-//inline void Tank::setPos(const Tmpl8::vec2& newPos)
-//{
-//		pos = newPos;
-//}
  
 inline const Tmpl8::vec2& Tank::getPos()const
 {
@@ -43,7 +36,6 @@ inline const Tmpl8::vec2& Tank::getPos()const
 
 inline void Tank::draw(Tmpl8::Surface* surface, const Tmpl8::vec2& camera)
 {
-	
 	tank.Draw(surface, static_cast<int>(pos.x - camera.x), static_cast<int>(pos.y - camera.y));
 	
 
